@@ -1,7 +1,5 @@
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
+import java.util.function.Predicate;
 
 public class Main {
     public static void main(String[] args) {
@@ -11,10 +9,11 @@ public class Main {
         list.add(new Person("Василий","Долгоруков-Крымский", 60));
         list.add(new Person("Михаил", "Голенищев-Кутузов-Смоленский", 63));
         list.add(new Person("Петр", "Семёнов-Тян-Шанский-Виленский", 70));
+        list.add(new Person("Иван", "Семёнов-Тян-Шан", 11));
+        list.add(new Person("Шаман", "Семёнов-Тян-Шан", 17));
 
-       PersonSurnameComaprator personSurnameComaprator = new PersonSurnameComaprator();
-       personSurnameComaprator.setAmountWordSurname(2);
-       Collections.sort(list, personSurnameComaprator);
+        Predicate<Person> isYoung = person -> person.getAge() < 18;
+        list.removeIf(isYoung);
         System.out.println(list);
     }
 }
