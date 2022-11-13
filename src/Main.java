@@ -1,7 +1,4 @@
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,9 +9,13 @@ public class Main {
         list.add(new Person("Михаил", "Голенищев-Кутузов-Смоленский", 63));
         list.add(new Person("Петр", "Семёнов-Тян-Шанский-Виленский", 70));
 
-       PersonSurnameComaprator personSurnameComaprator = new PersonSurnameComaprator();
-       personSurnameComaprator.setAmountWordSurname(2);
-       Collections.sort(list, personSurnameComaprator);
+        Comparator<Person> personSurnameComparatorNew = (o1, o2) -> {
+            if (Math.min(o1.getSurnname().split(" ").length, 2) != (Math.min(o2.getSurnname().split(" ").length, 2))){
+                return Integer.compare(o1.getSurnname().split(" ").length, o2.getSurnname().split(" ").length);
+            }
+            return Integer.compare(o1.getAge(), o2.getAge());
+        };
+        list.sort(personSurnameComparatorNew);
         System.out.println(list);
     }
 }
